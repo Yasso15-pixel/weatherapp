@@ -87,7 +87,7 @@ export default function Home() {
               <div className="text-6xl mb-2">
                 {Math.round(weather.main.temp)}°
               </div>
-              <div className="text-xl mb-1">{weather.weather[0].main}</div>
+              <div className="text-xl mb-1 text-black">{weather.weather[0].main}</div>
               <div className="text-4xl">📍</div>
               <p className="text-sm text-gray-600 mt-2">
                 {weather.name}, {weather.sys.country}
