@@ -61,24 +61,26 @@ export default function Home() {
 
       <main className="min-h-screen flex items-center justify-center bg-black px-4">
         <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-6 text-center">
-          <h1 className="text-2xl font-semibold mb-4">Weather App</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-black mb-4">Weather App</h1>
+
 
           <div className="flex gap-2 mb-6">
-            <input
-              type="text"
-              placeholder="Enter city"
-              className="flex-1 px-4 py-2 rounded-xl border"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-            <button
-              onClick={fetchWeather}
-              className="bg-black text-white px-4 py-2 rounded-xl"
-              disabled={loading}
-            >
-              {loading ? '...' : 'Search'}
-            </button>
-          </div>
+  <input
+    type="text"
+    placeholder="Enter city"
+    className="flex-1 px-4 py-2 rounded-xl border text-black placeholder-gray-500"
+    value={city}
+    onChange={(e) => setCity(e.target.value)}
+  />
+  <button
+    onClick={fetchWeather}
+    className="bg-black text-white px-4 py-2 rounded-xl"
+    disabled={loading}
+  >
+    {loading ? '...' : 'Search'}
+  </button>
+</div>
+
 
           {weather && (
             <div className="rounded-3xl p-6 bg-gradient-to-br from-pink-100 to-white shadow-inner">
