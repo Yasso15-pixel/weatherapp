@@ -1,38 +1,52 @@
-
-"use client"
+'use client'
 import Head from 'next/head'
-
 import { useState } from 'react'
+
+type WeatherData = {
+  main: {
+    temp: number
+  }
+  weather: { main: string }[]
+  name: string
+  sys: {
+    country: string
+  }
+  cod: number
+  message?: string
+}
+
 export default function Home() {
   const [city, setCity] = useState('')
-  const [weather, setWeather] = useState<any>(null)
+  const [weather, setWeather] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(false)
 
-  const API_KEY = '9f89dd76df7d89d83b35e19ec8101247' // 🔐 Replace this with your OpenWeatherMap key
+  const API_KEY = '9f89dd76df7d89d83b35e19ec8101247' // 🔐 use .env later
 
   const fetchWeather = async () => {
     if (!city) return
     setLoading(true)
+
     try {
       const res = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
           city
         )}&appid=${API_KEY}&units=metric`
       )
-      const data = await res.json()
+
+      const data: WeatherData = await res.json()
       console.log('Weather JSON:', data)
+
       if (data.cod === 200) {
         setWeather(data)
       } else {
-        alert(data.message)
+        alert(data.message || 'City not found')
         setWeather(null)
       }
     } catch (err) {
       alert('Error fetching weather')
     }
-    setLoading(false)
 
-    
+    setLoading(false)
   }
 
   return (
@@ -65,11 +79,12 @@ export default function Home() {
               {loading ? '...' : 'Search'}
             </button>
           </div>
-            
+
           {weather && (
-            
             <div className="rounded-3xl p-6 bg-gradient-to-br from-pink-100 to-white shadow-inner">
-              <div className="text-6xl mb-2">{Math.round(weather.main.temp)}°</div>
+              <div className="text-6xl mb-2">
+                {Math.round(weather.main.temp)}°
+              </div>
               <div className="text-xl mb-1">{weather.weather[0].main}</div>
               <div className="text-4xl">📍</div>
               <p className="text-sm text-gray-600 mt-2">
@@ -82,3 +97,4 @@ export default function Home() {
     </>
   )
 }
+
