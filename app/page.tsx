@@ -81,19 +81,17 @@ export default function Home() {
   </button>
 </div>
 
+{weather && (
+  <div className="rounded-3xl p-6 bg-gradient-to-br from-pink-100 to-white shadow-inner text-black">
+    <div className="text-6xl mb-2">{Math.round(weather.main.temp)}°</div>
+    <div className="text-xl mb-1">{weather.weather[0].main}</div>
+    <div className="text-4xl">📍</div>
+    <p className="text-sm text-gray-600 mt-2">
+      {weather.name}, {weather.sys.country}
+    </p>
+  </div>
+)}
 
-          {weather && (
-            <div className="rounded-3xl p-6 bg-gradient-to-br from-pink-100 to-white shadow-inner">
-              <div className="text-6xl mb-2">
-                {Math.round(weather.main.temp)}°
-              </div>
-              <div className="text-xl mb-1 text-black">{weather.weather[0].main}</div>
-              <div className="text-4xl">📍</div>
-              <p className="text-sm text-gray-600 mt-2">
-                {weather.name}, {weather.sys.country}
-              </p>
-            </div>
-          )}
         </div>
       </main>
     </>
